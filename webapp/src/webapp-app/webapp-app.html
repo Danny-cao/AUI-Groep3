@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="verwijderen-app.html">
+
+<dom-module id="webapp-app">
+  <template>
+    <verwijderen-app> </verwijderen-app>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class WebappApp extends Polymer.Element {
+      static get is() { return 'webapp-app'; }
+      }
+
+    window.customElements.define(WebappApp.is, WebappApp);
+  </script>
+</dom-module>

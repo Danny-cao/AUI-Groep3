@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+
+<dom-module id="verwijderen-app">
+  <template>
+    <paper-dropdown-menu style="width:500px;" label="Gerechten verwijderen">
+	  <paper-listbox slot="dropdown-content" selected="0">
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	  </paper-listbox>
+	</paper-dropdown-menu> <br>
+	<paper-button on-click="clickHandler">Bevestigen</paper-button><br/>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class VerwijderenApp extends Polymer.Element {
+      static get is() { return 'verwijderen-app'; }
+    }
+
+    window.customElements.define(VerwijderenApp.is, VerwijderenApp);
+  </script>
+</dom-module>
