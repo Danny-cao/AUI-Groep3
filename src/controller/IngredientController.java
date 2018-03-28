@@ -21,8 +21,6 @@ public class IngredientController implements Handler {
 	}
 	
 	public void handle(Conversation conversation) {
-		JsonObjectBuilder response = Json.createObjectBuilder();
-		
 		String action = conversation.getParameter("action");
 		if (action != null) {
 			switch (action) {
@@ -31,7 +29,7 @@ public class IngredientController implements Handler {
 					int ingredientId = Integer.parseInt(conversation.getParameter("id"));
 					Ingredient ingredient = getIngredientById(ingredientId);
 					if (ingredient != null) {
-						response.add("ingredient", ingredient.getInfo());
+						conversation.sendJSONMessage(ingredient.getInfo().toString());
 					}
 				}
 				catch (Exception e) {
@@ -40,10 +38,8 @@ public class IngredientController implements Handler {
 				break;
 			}
 		} else {
-			response.add("ingredienten", getIngredienten());
+			conversation.sendJSONMessage(getIngredienten().toString());
 		}
-		
-		conversation.sendJSONMessage(response.build().toString());
 	}
 	
 	private Ingredient getIngredientById(int id) {

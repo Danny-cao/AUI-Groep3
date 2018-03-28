@@ -17,8 +17,6 @@ public class BestellingController implements Handler {
 	private ArrayList<Bestelling> bestellingen;
 	
 	public void handle(Conversation conversation) {
-		JsonObjectBuilder response = Json.createObjectBuilder();
-		
 		String action = conversation.getParameter("action");
 		if (action != null) {
 			switch (action) {
@@ -27,7 +25,7 @@ public class BestellingController implements Handler {
 					int bestellingId = Integer.parseInt(conversation.getParameter("id"));
 					Bestelling bestelling = getBestellingById(bestellingId);
 					if (bestelling != null) {
-						response.add("bestelling", bestelling.getInfo());
+						conversation.sendJSONMessage(bestelling.getInfo().toString());
 					}
 				}
 				catch (Exception e) {
@@ -36,10 +34,8 @@ public class BestellingController implements Handler {
 				break;
 			}
 		} else {
-			response.add("bestellingen", getBestellingen());
+			conversation.sendJSONMessage(getBestellingen().toString());
 		}
-		
-		conversation.sendJSONMessage(response.build().toString());
 	}
 	
 	private Bestelling getBestellingById(int id) {

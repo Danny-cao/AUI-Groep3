@@ -23,8 +23,6 @@ public class GerechtController implements Handler {
 	}
 	
 	public void handle(Conversation conversation) {
-		JsonObjectBuilder response = Json.createObjectBuilder();
-		
 		String action = conversation.getParameter("action");
 		if (action != null) {
 			switch (action) {
@@ -33,7 +31,7 @@ public class GerechtController implements Handler {
 					int gerechtId = Integer.parseInt(conversation.getParameter("id"));
 					Gerecht gerecht = getGerechtById(gerechtId);
 					if (gerecht != null) {
-						response.add("gerecht", gerecht.getInfo());
+						conversation.sendJSONMessage(gerecht.getInfo().toString());
 					}
 				}
 				catch (Exception e) {
@@ -42,10 +40,8 @@ public class GerechtController implements Handler {
 				break;
 			}
 		} else {
-			response.add("gerechten", getGerechten());
+			conversation.sendJSONMessage(getGerechten().toString());
 		}
-		
-		conversation.sendJSONMessage(response.build().toString());
 	 }
 	
 	private Gerecht getGerechtById(int id) {

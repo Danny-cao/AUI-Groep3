@@ -24,7 +24,6 @@ public class SeizoenController implements Handler {
 	}
 
 	public void handle(Conversation conversation) {
-		JsonObjectBuilder response = Json.createObjectBuilder();
 		
 		String action = conversation.getParameter("action");
 		if (action != null) {
@@ -34,7 +33,7 @@ public class SeizoenController implements Handler {
 					int seizoenId = Integer.parseInt(conversation.getParameter("id"));
 					Seizoen seizoen = getSeizoenById(seizoenId);
 					if (seizoen != null) {
-						response.add("seizoen", seizoen.getInfo());
+						conversation.sendJSONMessage(seizoen.getInfo().toString());
 					}
 				}
 				catch (Exception e) {
@@ -43,10 +42,9 @@ public class SeizoenController implements Handler {
 				break;
 			}
 		} else {
-			response.add("seizoenen", getSeizoenen());
+			conversation.sendJSONMessage(getSeizoenen().toString());
 		}
 		
-		conversation.sendJSONMessage(response.build().toString());
 	}
 	
 	private Seizoen getSeizoenById(int id) {
