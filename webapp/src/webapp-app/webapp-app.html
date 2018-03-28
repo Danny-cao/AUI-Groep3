@@ -1,10 +1,26 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="verwijderen-app.html">
-<link rel="import" href="toevoegen-app.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="webapp-app">
   <template>
-    <toevoegen-app> </toevoegen-app>
+    <h2>Gerecht toevoegen: </h2>
+    <paper-input label="Naam van het gerecht:" value="{{gerechtsnaam}}"></paper-input>
+    <paper-input label="ingredienten:" value="{{ingredienten}}"></paper-input>
+    <paper-input label="prijs:" value="{{prijs}}"></paper-input>
+    <paper-input label="beschikbaar in seizoen:" value="{{beschikbaar}}"></paper-input>
+ 	<paper-button on-click="clickHandler">GO</paper-button><br/>
+ 	<p>Response: <span id="response_text"></span></p>
+ 	
+ 	<iron-ajax
+	 id="example_ajax_call"
+	 method="POST"
+	 url="/example"
+	 handle-as="json"
+	 on-response="handleAjaxResponse"
+	></iron-ajax>
+    
   </template>
 
   <script>
@@ -14,7 +30,36 @@
      */
     class WebappApp extends Polymer.Element {
       static get is() { return 'webapp-app'; }
+      static get properties() {
+        return {
+          gerechtsnaam: {
+            type: String,
+            value: ''
+          },
+          ingredienten: {
+            type: String,
+            value: ''
+          },
+          prijs: {
+            type: String,
+            value: ''
+          },
+          beschikbaar: {
+            type: String,
+            value: ''
+          }
+        };
       }
+      clickHandler() {
+    	  this.$.example_ajax_call.contentType="application/json";
+    	  this.$.example_ajax_call.params = { "gerechtsnaam": this.gerechtsnaam , "ingredienten" : this.ingredienten, "prijs" : this.prijs, "beschikbaar" : this.beschikbaar};
+    	  this.$.example_ajax_call.body = { "gerechtsnaam": this.gerechtsnaam , "ingredienten" : this.ingredienten, "prijs" : this.prijs, "beschikbaar" : this.beschikbaar};
+    	  this.$.example_ajax_call.generateRequest();
+    	}
+      handleAjaxResponse(result) {
+    	  this.$.response_text.textContent = result.detail.response.message;
+    	}
+    }
 
     window.customElements.define(WebappApp.is, WebappApp);
   </script>
