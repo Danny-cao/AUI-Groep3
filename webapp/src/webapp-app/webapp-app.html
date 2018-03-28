@@ -2,6 +2,10 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
 
 <dom-module id="webapp-app">
   <template>
@@ -10,8 +14,8 @@
     <paper-input label="ingredienten:" value="{{ingredienten}}"></paper-input>
     <paper-input label="prijs:" value="{{prijs}}"></paper-input>
     <paper-input label="beschikbaar in seizoen:" value="{{beschikbaar}}"></paper-input>
- 	<paper-button on-click="clickHandler">GO</paper-button><br/>
- 	<p>Response: <span id="response_text"></span></p>
+ 	<paper-button on-click="clickHandler">Bevestigen</paper-button><br/>
+ 	<p><span id="response_text"></span></p>
  	
  	<iron-ajax
 	 id="example_ajax_call"
