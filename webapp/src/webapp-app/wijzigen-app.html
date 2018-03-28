@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+
+<dom-module id="wijzigen-app">
+  <template>
+    <paper-dropdown-menu style="width:500px;" label="Gerechten selecteren">
+	  <paper-listbox slot="dropdown-content" selected="0">
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	    <paper-item>Sushi (Tonijn, Rijst, Zeewier) [3,50] {beschikbaar: Zomer}</paper-item>
+	  </paper-listbox>
+	</paper-dropdown-menu>
+  <paper-input label="Naam"></paper-input>
+  <paper-input label="Ingredienten"></paper-input>
+  <paper-input label="Prijs"></paper-input>
+  <paper-input label="Beschikbaar"></paper-input>
+  <br><paper-button on-click="clickHandler">Wijzigen</paper-button><br/>
+  </template>
+</dom-module>
+
+<script>
+  /**
+   * @customElement
+   * @polymer
+   */
+  class WijzgigenApp extends Polymer.Element {
+    static get is() { return 'wijzigen-app'; }
+  }
+
+  window.customElements.define(WijzigenApp.is, WijzigenApp);
+</script>
+</dom-module>
