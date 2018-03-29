@@ -22,18 +22,43 @@
   <paper-input label="Prijs"></paper-input>
   <paper-input label="Beschikbaar"></paper-input>
   <br><paper-button on-click="clickHandler">Wijzigen</paper-button><br/>
+  <p>Response: <span id="response_text"></span></p>
+
+	<iron-ajax
+	 id="example_ajax_call"
+	 method="POST"
+	 url="/example"
+	 handle-as="json"
+	 on-response="handleAjaxResponse"
+	></iron-ajax>
   </template>
 </dom-module>
 
 <script>
-  /**
-   * @customElement
-   * @polymer
-   */
-  class WijzgigenApp extends Polymer.Element {
-    static get is() { return 'wijzigen-app'; }
-  }
-
-  window.customElements.define(WijzigenApp.is, WijzigenApp);
-</script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class WijzigenApp extends Polymer.Element {
+      static get is() { return 'wijzigen-app'; }
+      static get properties() {
+          return {
+            gerecht: {
+              type: String,
+              value: ''
+            }
+          };
+        }
+      clickHandler() {
+    	  this.$.example_ajax_call.contentType="application/json";
+    	  this.$.example_ajax_call.params = { "gerecht": this.gerecht };
+    	  this.$.example_ajax_call.body = { "gerecht": this.gerecht };
+    	  this.$.example_ajax_call.generateRequest();
+    	}
+      handleAjaxResponse(result) {
+    	  this.$.response_text.textContent = result.detail.response.message;
+    	}
+    }
+    window.customElements.define(WijzigenApp.is, WijzigenApp);
+  </script>
 </dom-module>
